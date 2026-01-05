@@ -55,7 +55,7 @@ model = Sequential([
     # 2) 크기 축소
     MaxPooling2D((2, 2)),
 
-    # 3) 2D -> 1d 변환
+    # 3) 2D -> 1D 변환
     Flatten(),
 
     # 4) 분류
