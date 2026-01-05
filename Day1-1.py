@@ -1,94 +1,106 @@
+# 1. 오늘 배울 핵심 개념
+# * 오늘 개념 3개
+# 1) dict/Counter -> 빈도 계산
+# 2) sorted() -> 정렬 기준 커스터마이징
+# 함수 분리 -> 코드 안정성
+
+# 문제 1 (빈도 계산 - 최빈값)
+# 정수 배열이 주어질 때 가장 많이 등장한 숫자를 반환하시오. (등장 횟수가 같다면 더 작은 숫자 반환)
+
 arr = [4, 1, 2, 2, 3, 3, 3, 4, 4]
+
+# 1)접근 사고 과정 숫자가 몇 번 나왔는지 알아야 함 -> 빈도
+# 2)가장 많이 나온 것 선택
+# 3)같은면 작은 값
+# -> 빈도 + 정렬 문제
 
 from collections import Counter
 
 def most_frequent_number(arr):
+    # Counter는 각자 숫자의 등장 횟수를 자동으로 계산해준다
+    count = Counter(arr)
     
-    count = Counter(arr)
-
+    # count.items() -> (숫자, 등장횟수)
+    # 정렬 기준:
+    # (1) 등장횟수는 내림차순 (-x[1])
+    # (2) 숫자는 오름차순 (x[0])
     sorted_items = sorted(count.items(), key=lambda x: (-x[1], x[0]))
 
+    # 가장 앞에 있는 값의 숫자만 반환
     return sorted_items[0][0]
 
 print(most_frequent_number(arr))
 
+# 시험에서 써먹는 설명
+# "Counter로 빈도를 계산한 뒤, 등장 횟수 내림차순 + 값 오름차순으로 정렬했습니다."
+
+########################################################################################################################################################################################################################
+
+# 문제 2 (리스트 전처리 - 중복 제거 + 정렬)
+# 정수 배열에서 중복을 제거하고 오름차순으로 정렬된 리스트를 반환하시오.
+
 arr = [5, 3, 1, 3, 5, 2]
 
+# 접근
+# (1)중복 제거 -> set
+# (2)출력은 리스트 -> list()
+# (3)정렬 -> sorted()
+
 def unique_sorted_list(arr):
+    # set은 중복을 자동으로 제거해준다
     unique_numbers = set(arr)
 
+    # set은 순서가 없기 때문에 정렬이 필요
     sorted_numbers = sorted(unique_numbers)
 
     return sorted_numbers
 
 print(unique_sorted_list(arr))
 
-arr = [4, 1, 2, 2, 3, 3, 3, 4, 4]
+# 시험 한 줄 정리
+# "중복 제거는 set, 출력은 sorted로 처리했습니다."
 
-from collections import Counter
+########################################################################################################################################################################################################################
 
-def most_frequent_number(arr):
-    count = Counter(arr)
+# 오늘 핵심 패턴 요약(진짜 중요)
 
-    sorted_items = sorted(count.items(), key=lambda x: (-x[1], x[0]))
+# 패턴 1: 빈도 문제
+# Counter(arr)
 
-    return sorted_items[0][0]
+# 패턴 2: 정렬 기준 변경
+# sorted(data, key=lambda x: (...))
 
-print(most_frequent_number(arr))
+# 패턴 3: 중복 제거
+# set(arr)
 
-arr = [5, 3, 1, 3, 5, 2]
+# 오늘 체크 포인트
+# Counter가 뭐 하는지 설명할 수 있나?
+# "Counter는 리스트나 배열에서 각 값이 몇 번 등장했는지를 딕셔너리 형태로 자동 계산해준다."
+# ex)
+Counter([1,2,2,3])
+# {1:1, 2:2, 3:1}
 
-def unique_sorted_list(arr):
-    unique_numbers = set(arr)
+# -x[1]이 외 필요한지 말할 수 있나?
+sorted(count.item(), key=lambda x: (-x[1], x[0]))
+# 여기서 x는 뭐냐면 :(숫자, 등장횟수)
+# ex)
+(3, 4)
+# x[1]의 의미 : x[0] -> 숫자, x[1] -> 등장 횟수
+# 왜 -x[1]냐면
+# sorted()의 기본 정렬은 오름차순(작->큰)이기 때문이야.
+# 하지만 우리는: 등장 횟수가 많은 것부터 보고 싶음
+# 그래서: 큰 수를 먼저 나오게 하려면 부호를 뒤집어서 정렬
+# ex)
+count.item()
+# [(1, 2), (3, 5), (2, 3)]
+# 그냥 정렬하면
+sorted(..., key=lambda x: x[1])
+# [(1,2), (2,3), (3,5)]
+# -x[1] 사용하면
+sorted(..., key=lambda x: -x[1])
+# [(3,5), (2,3), (1,2)]
 
-    sorted_numbers = sorted(unique_numbers)
+# 시험용 한 줄 답변 sorted는 기본이 오름차순이어서 등장 횟수가 많은 값을 먼저 오게 하려고 -x[1]로 내림차순 정렬했습니다.
+# "set은 순서가 없기 때문에 정렬이 필요하다", "set으로 중복을 제거한 뒤, 출력 형식을 맞추기 위해 sort로 정렬했습니다."
 
-    return sorted_numbers
-
-print(unique_sorted_list(arr))
-
-arr = [4, 1, 2, 2, 3, 3, 3, 4, 4]
-
-from collections import Counter
-
-def most_frequent_number(arr):
-    count = Counter(arr)
-
-    sorted_items = sorted(count.items(), key=lambda x: (-x[1], x[0]))
-
-    return sorted_items[0][0]
-
-print(most_frequent_number(arr))
-
-arr = [5, 3, 1, 3, 5, 2]
-
-def unique_sorted_list(arr):
-    unique_numbers = set(arr)
-
-    sorted_numbers = sorted(unique_numbers)
-
-    return sorted_numbers
-
-print(unique_sorted_list(arr))
-
-arr = [4, 1, 2, 2, 3, 3, 3, 4, 4]
-
-from collections import Counter
-
-def most_frequent_number(arr):
-    count =Counter(arr)
-    sorted_items = sorted(count.items(), key=lambda x: (-x[1], x[0]))
-
-    return sorted_items[0][0]
-
-print(most_frequent_number(arr))
-
-arr = [5, 3, 1, 3, 5, 2]
-
-def unique_sorted_list(arr):
-    unique_numbers = set(arr)
-    sorted_numbers = sorted(unique_numbers)
-
-    return sorted_numbers
-
-print(unique_sorted_list(arr))
+# set을 쓰면 왜 다시 sorted가 필요한지 아나?
