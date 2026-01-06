@@ -6,7 +6,7 @@ def keep_alpha_to_lower(s: str) -> str:
     result_chars = []   # 알파벳만 모아둘 리스트
 
     for ch in s:
-        if ch.isalpha():    #  알파벡이면  True
+        if ch.isalpha():    #  알파벳이면  True
             result_chars.append(ch.lower()) # 소문자로 바꿔서 저장
 
     # 리스트에 모은 문자들을 하나의 문자열로 합침
