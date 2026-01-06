@@ -9,3 +9,16 @@ grid = [
     [1,1,0],
     [0,1,1]
 ]
+
+q = deque()
+q.append((0, 0))
+dist[0][0] = 1
+
+while q:
+    x, y = q.popleft()
+    for dx, dy in dirs:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < n and 0 <= ny < m:
+            if grid[nx][ny] == 1 and dist[nx][ny] == -1:
+                dist[nx][ny] = dist[x][y] + 1
+                q.append((nx, ny))

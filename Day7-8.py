@@ -5,3 +5,18 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 
+model = Sequential ([
+    # 특징 추출: 합성곱 층
+    Conv2D(32, (3, 3,), activation='relu', input_shape=(28, 28, 1)),
+
+    # 크기 축소
+    MaxPooling2D((2, 2)),
+
+    # 2D -> 1D 변환
+    Flatten(),
+
+    # 분류
+    Dense(10, activation='softmax')
+])
+
+model.summary()

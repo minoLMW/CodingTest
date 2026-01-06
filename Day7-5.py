@@ -5,3 +5,14 @@
 
 arr = [2, 3, 1, 2, 4, 3]
 k = 7
+
+left = 0
+curr = 0
+ans = float('inf')
+
+for right in range(len(arr)):
+    curr += arr[right]
+    while curr >= K:
+        ans = min(ans, right - left + 1)
+        curr -= arr[left]
+        left += 1
