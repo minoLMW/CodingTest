@@ -19,7 +19,7 @@ for right in range(len(arr)):
 
 left = 0
 curr = 0
-ans = floart('inf')
+ans = float('inf')
 
 for right in range(len(arr)):
     curr += arr[right]

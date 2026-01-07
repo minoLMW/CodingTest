@@ -29,6 +29,18 @@ def keep_alpha_to_lower(s: str) -> str:
         if ch.isalpha():
             ch = ch.lower()
             # 처음이거나, 직전에 추가한 문자와 다를 때만 추가
-            if not result or reslut[-1] != ch:
+            if not result or result[-1] != ch:
                 result.append(ch)
     return "".join(result)
+
+def keep_alpha_to_lower(s: str) -> str:
+    result = []
+
+    for ch in s:
+        if ch.isalpha():
+            ch = ch.lower()
+            # 처음이거나, 직전에 추가한 문자와 다를 때만 추가
+            if not result or result[-1] != ch:
+                result.append(ch)
+    return "".join(result)
+
