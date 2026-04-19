@@ -1,0 +1,16 @@
+# SQL 정리
+
+-- 기본 틀 외우기
+SELECT 컬럼
+FROM 테이블
+WHERE 조건
+GROUP BY 컬럼
+HAVING 집계조건
+ORDER BY 컬럼 DESC
+LIMIT 5;
+
+-- JOIN 패턴
+SELECT a.name, b.score
+FROM users a
+LEFT JOIN scores b ON a.id = b.user_id
+WHERE b.score IS NOT NULL;

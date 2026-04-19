@@ -11,3 +11,4 @@ arr = [1, 2, 2, 3, 3, 3]
 def most_frequent_numver(arr):
     freq = Counter(arr)
     
+    
